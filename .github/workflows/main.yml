@@ -1,0 +1,22 @@
+name: Build Java File
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+       os: [ubuntu-latest,windows-latest]
+    
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Validate the syntax
+      run: mvn validate
+
+    - name: Compile and package
+      run: mvn clean install
